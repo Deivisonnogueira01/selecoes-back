@@ -1,7 +1,5 @@
 import {
-  Injectable,
-  InternalServerErrorException,
-  NotFoundException
+  Injectable, NotFoundException
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -28,7 +26,7 @@ export class SelecaoService {
   async findOne(id: number): Promise<Selecao> {
 
     const Selecao = this.SelecaoRepository.createQueryBuilder('Selecao')
-      .select(['Selecao.id', 'Selecao.nome'])
+      .select(['Selecao.id', 'Selecao.nomeSelecao'])
       .getOne();
     if (!Selecao) throw new NotFoundException('Selecão não encontrada');
 
@@ -37,8 +35,8 @@ export class SelecaoService {
   }
 
  
-  async findByNome(nome: string): Promise<Selecao> {
-    return await this.SelecaoRepository.findOneBy({ nome });
+  async findByNome(nomeSelecao: string): Promise<Selecao> {
+    return await this.SelecaoRepository.findOneBy({ nomeSelecao });
   }
  
   async remove(SelecaoId: number) {

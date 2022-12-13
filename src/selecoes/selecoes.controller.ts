@@ -11,7 +11,7 @@ import {
 import { SelecaoService } from './selecoes.service';
 
 
-@Controller('Selecao')
+@Controller('selecao')
 export class SelecaoController {
   constructor(private readonly SelecaoService: SelecaoService) {}
 

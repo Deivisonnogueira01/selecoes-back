@@ -2,7 +2,7 @@
 export class CreateSelecaoDto {
   id: string;
 
-  nome: string;
+  nomeSelecao: string;
 
   QtdTitulos: string;
 
