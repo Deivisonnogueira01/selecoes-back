@@ -6,7 +6,7 @@ import {
 export class Selecao {
 
   @PrimaryGeneratedColumn('uuid')
-  id: number; //
+  id: number;
 
   @Column()
   nomeSelecao: string;
