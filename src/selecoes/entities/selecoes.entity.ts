@@ -2,7 +2,7 @@ import {
   Column, Entity, PrimaryGeneratedColumn 
 } from 'typeorm';
 
-@Entity('tbl_Selecao')
+@Entity('tbl_selecao')
 export class Selecao {
 
   @PrimaryGeneratedColumn('uuid')
@@ -12,7 +12,7 @@ export class Selecao {
   nomeSelecao: string;
 
   @Column()
-  QtdTitulos: string;
+  qtdTitulos: string;
 
   @Column()
   informacoes: string;

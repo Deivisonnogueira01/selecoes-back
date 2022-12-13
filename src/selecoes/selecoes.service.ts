@@ -5,7 +5,6 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { UpdateSelecaoDto } from './dto/update-selecao.dto';
 import { Selecao } from './entities/selecoes.entity';
 
 @Injectable()
@@ -21,7 +20,7 @@ export class SelecaoService {
     try {
       return await this.SelecaoRepository.find();
     } catch (err) {
-      console.log('Impossível buscar usuários');
+      console.log('Impossível buscar Selecão Selecionada!');
       return null;
     }
   }
@@ -29,45 +28,24 @@ export class SelecaoService {
   async findOne(id: number): Promise<Selecao> {
 
     const Selecao = this.SelecaoRepository.createQueryBuilder('Selecao')
-      .select(['Selecao.nome', 'Selecao.email'])
+      .select(['Selecao.id', 'Selecao.nome'])
       .getOne();
-    if (!Selecao) throw new NotFoundException('Selecao não encontrado');
+    if (!Selecao) throw new NotFoundException('Selecão não encontrada');
 
     return Selecao;
 
   }
 
  
-  async findByEmail(email: string): Promise<Selecao> {
-    return await this.SelecaoRepository.findOneBy({ email });
+  async findByNome(nome: string): Promise<Selecao> {
+    return await this.SelecaoRepository.findOneBy({ nome });
   }
  
-
-
-  async update(id: number, updateSelecaoDto: UpdateSelecaoDto) {
-
-    const Selecao = await this.findOne(id);
-    const { name, email} = updateSelecaoDto;
-    Selecao.name = name ? name : Selecao.name;
-    Selecao.email = email ? email : Selecao.email;
-   
-    try {
-      await this.SelecaoRepository.save(Selecao);
-      return Selecao;
-    } catch (error) {
-      throw new InternalServerErrorException(
-        'Erro ao salvar os dados no banco de dados',
-      );
-    }
-
-  }
-
   async remove(SelecaoId: number) {
-
     const result = await this.SelecaoRepository.delete({ id: SelecaoId });
     if (result.affected === 0) {
       throw new NotFoundException(
-        'Não foi encontrado um usuário com o ID informado',
+        'Não foi encontrado uuma Seleção com o ID informado',
       );
     }
 
